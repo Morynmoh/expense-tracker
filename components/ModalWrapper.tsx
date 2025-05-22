@@ -1,5 +1,5 @@
 import { Platform, StyleSheet, Text, View, Dimensions } from "react-native";
-import React from "react";
+import * as React from "react";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { ModalWrapperProps } from "@/types";
 import { StatusBar } from "expo-status-bar";

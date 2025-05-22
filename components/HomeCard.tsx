@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import * as React from "react";
 import { scale, verticalScale } from "@/utils/styling";
 import Typo from "./Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";

@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import * as React from "react";
 import { ScreenWrapperProps } from "@/types";
 import { colors } from "@/constants/theme";
 import { StatusBar } from "expo-status-bar";

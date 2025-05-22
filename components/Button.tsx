@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { Children } from "react";
+// import React, { Children } from "react";
+import React from "react";
 import { CustomButtonProps } from "@/types";
 import Loading from "./Loading";
 import Typo from "./Typo";

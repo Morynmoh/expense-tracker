@@ -7,12 +7,12 @@ import { getFirestore, collection } from "firebase/firestore";
 // 1. create new project on firebase console
 // 2. create a web app and copy the firebseConfigs below
 const firebaseConfig = {
-  apiKey: "AIzaSyBGQFsx67DsdEaThzvjy8jh-qWexCCoN_8",
-  authDomain: "expense-tracker-test-64054.firebaseapp.com",
-  projectId: "expense-tracker-test-64054",
-  storageBucket: "expense-tracker-test-64054.appspot.com",
-  messagingSenderId: "451101639624",
-  appId: "1:451101639624:web:a441be84a3db583b0f76fd",
+  apiKey: "AIzaSyCtKAwvVAaA-Vln6OhNJcZJ_DBKtv40VTg",
+  authDomain: "expense-tracker-c5652.firebaseapp.com",
+  projectId: "expense-tracker-c5652",
+  storageBucket: "expense-tracker-c5652.firebasestorage.app",
+  messagingSenderId: "285177309040",
+  appId: "1:285177309040:web:7355e6eb4de971f1f451b5"
 };
 
 // Initialize Firebase

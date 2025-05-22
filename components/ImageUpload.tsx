@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import * as React from "react";
 import * as Icons from "phosphor-react-native";
 import { colors, radius } from "@/constants/theme";
 import { ImageUploadProps } from "@/types";

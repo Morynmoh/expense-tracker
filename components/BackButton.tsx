@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import * as React from "react";
 import { Router, useRouter } from "expo-router";
 import { colors, radius } from "@/constants/theme";
 import { CaretLeft } from "phosphor-react-native";
