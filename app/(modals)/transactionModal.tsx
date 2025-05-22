@@ -240,7 +240,7 @@ const TransactionModal = () => {
               itemContainerStyle={styles.dropdownItemContainer}
               iconStyle={styles.dropdownIcon}
               data={wallets.map((wallet) => ({
-                label: `${wallet?.name} ($${wallet.amount})`,
+                label: `${wallet?.name} (KES ${wallet.amount})`,
                 value: wallet?.id,
               }))}
               maxHeight={300}
