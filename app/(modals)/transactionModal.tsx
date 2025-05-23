@@ -19,6 +19,7 @@ import { scale, verticalScale } from "@/utils/styling";
 import * as Icons from "phosphor-react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Button from "@/components/Button";
+import { formatNumber } from "@/utils/common";
 
 import { Dropdown } from "react-native-element-dropdown";
 import useFetchData from "@/hooks/useFetchData";
@@ -240,7 +241,7 @@ const TransactionModal = () => {
               itemContainerStyle={styles.dropdownItemContainer}
               iconStyle={styles.dropdownIcon}
               data={wallets.map((wallet) => ({
-                label: `${wallet?.name} (KES ${wallet.amount})`,
+                label: `${wallet?.name} (KES ${formatNumber(wallet.amount || 0)})`,
                 value: wallet?.id,
               }))}
               maxHeight={300}

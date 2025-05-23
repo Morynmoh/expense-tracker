@@ -52,7 +52,7 @@ const HomeCard = () => {
             />
           </View>
           <Typo color={colors.black} size={30} fontWeight={"bold"}>
-            ${" "}
+            KES{" "}
             {walletLoading ? "----" : formatNumber(getTotals()?.balance)}
           </Typo>
         </View>
@@ -75,7 +75,7 @@ const HomeCard = () => {
             </View>
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.green} fontWeight={"600"}>
-                ${" "}
+                KES{" "}
                 {walletLoading ? "----" : formatNumber(getTotals()?.income)}
               </Typo>
             </View>
@@ -97,7 +97,7 @@ const HomeCard = () => {
             </View>
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.rose} fontWeight={"600"}>
-                ${" "}
+                KES{" "}
                 {walletLoading ? "----" : formatNumber(getTotals()?.expenses)}
               </Typo>
             </View>

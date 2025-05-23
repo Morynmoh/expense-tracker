@@ -48,7 +48,7 @@ const WalletListItem = ({
         <View style={styles.nameContainer}>
           <Typo size={16}>{item.name}</Typo>
           <Typo size={14} color={colors.neutral400}>
-            ${formatNumber(item?.amount || 0)}
+            KES {formatNumber(item?.amount || 0)}
           </Typo>
         </View>
 
