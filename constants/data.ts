@@ -46,6 +46,24 @@ export const expenseCategories: ExpenseCategoriesType = {
     icon: Icons.Heart,
     bgColor: "#e11d48", // Dark Purple
   },
+  shopping: {
+    label: "Shopping",
+    value: "shopping",
+    icon: Icons.ShoppingCart,
+    bgColor: "#7c3aed", // Dark Indigo
+  },
+  schoolFees: {
+    label: "School Fees",
+    value: "schoolfees",
+    icon: Icons.Student,
+    bgColor: "#0f766e", // Darker Red-Brown
+  },
+  wages: {
+    label: "Wages",
+    value: "wages",
+    icon: Icons.CookingPot,
+    bgColor: "#404040", // Dark Gray
+  },
   insurance: {
     label: "Insurance",
     value: "insurance",
@@ -69,6 +87,12 @@ export const expenseCategories: ExpenseCategoriesType = {
     value: "personal",
     icon: Icons.User,
     bgColor: "#a21caf", // Deep Pink
+  },
+  homeCash: {
+    label: "Homecash",
+    value: "homecash",
+    icon: Icons.Money,
+    bgColor: "#065F46", // Deep Teal Green
   },
   others: {
     label: "Others",

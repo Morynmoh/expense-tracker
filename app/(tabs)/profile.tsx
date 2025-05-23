@@ -51,30 +51,30 @@ const Profile = () => {
     //   routeName: "/(modals)/categoryModal",
     //   bgColor: "#10b981",
     // },
-    {
-      title: "Settings",
-      icon: (
-        <Icons.GearSix
-          size={verticalScale(26)}
-          color={colors.white}
-          weight="fill"
-        />
-      ),
-      // routeName: "/(modals)/categoryModal",
-      bgColor: "#059669",
-    },
-    {
-      title: "Privacy Policy",
-      icon: (
-        <Icons.Lock
-          size={verticalScale(26)}
-          color={colors.white}
-          weight="fill"
-        />
-      ),
-      // routeName: "/(modals)/categoryModal",
-      bgColor: colors.neutral600,
-    },
+    // {
+    //   title: "Settings",
+    //   icon: (
+    //     <Icons.GearSix
+    //       size={verticalScale(26)}
+    //       color={colors.white}
+    //       weight="fill"
+    //     />
+    //   ),
+    //   // routeName: "/(modals)/categoryModal",
+    //   bgColor: "#059669",
+    // },
+    // {
+    //   title: "Privacy Policy",
+    //   icon: (
+    //     <Icons.Lock
+    //       size={verticalScale(26)}
+    //       color={colors.white}
+    //       weight="fill"
+    //     />
+    //   ),
+    //   // routeName: "/(modals)/categoryModal",
+    //   bgColor: colors.neutral600,
+    // },
     {
       title: "Logout",
       icon: (

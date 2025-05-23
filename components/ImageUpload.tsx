@@ -21,8 +21,7 @@ const ImageUpload = ({
     // No permissions request is necessary for launching the image library
     let result: ImagePicker.ImagePickerResult =
       await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        // allowsEditing: true,
+        mediaTypes: ["images"],
         aspect: [4, 3],
         quality: 0.5,
       });
