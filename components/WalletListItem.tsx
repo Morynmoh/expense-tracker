@@ -8,6 +8,7 @@ import Typo from "./Typo";
 import * as Icons from "phosphor-react-native";
 import { Router, useRouter } from "expo-router";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { formatNumber } from "@/utils/common";
 
 const WalletListItem = ({
   item,
@@ -47,7 +48,7 @@ const WalletListItem = ({
         <View style={styles.nameContainer}>
           <Typo size={16}>{item.name}</Typo>
           <Typo size={14} color={colors.neutral400}>
-            ${item?.amount?.toFixed(2) || 0}
+            ${formatNumber(item?.amount || 0)}
           </Typo>
         </View>
 

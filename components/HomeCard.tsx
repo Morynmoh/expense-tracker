@@ -8,6 +8,8 @@ import useFetchData from "@/hooks/useFetchData";
 import { WalletType } from "@/types";
 import { orderBy, where } from "firebase/firestore";
 import { useAuth } from "@/contexts/authContext";
+import { formatNumber } from "@/utils/common";
+
 const HomeCard = () => {
   const { user } = useAuth();
   const {
@@ -50,8 +52,8 @@ const HomeCard = () => {
             />
           </View>
           <Typo color={colors.black} size={30} fontWeight={"bold"}>
-            {/* $ 234.23 */}${" "}
-            {walletLoading ? "----" : getTotals()?.balance?.toFixed(2)}
+            ${" "}
+            {walletLoading ? "----" : formatNumber(getTotals()?.balance)}
           </Typo>
         </View>
 
@@ -73,8 +75,8 @@ const HomeCard = () => {
             </View>
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.green} fontWeight={"600"}>
-                {/* $ 233.42 */}${" "}
-                {walletLoading ? "----" : getTotals()?.income.toFixed(2)}
+                ${" "}
+                {walletLoading ? "----" : formatNumber(getTotals()?.income)}
               </Typo>
             </View>
           </View>
@@ -95,8 +97,8 @@ const HomeCard = () => {
             </View>
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.rose} fontWeight={"600"}>
-                {/* $ 534.23 */}${" "}
-                {walletLoading ? "----" : getTotals()?.expenses.toFixed(2)}
+                ${" "}
+                {walletLoading ? "----" : formatNumber(getTotals()?.expenses)}
               </Typo>
             </View>
           </View>

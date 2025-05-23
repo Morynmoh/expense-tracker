@@ -15,6 +15,7 @@ import { Timestamp } from "firebase/firestore";
 import { useRouter } from "expo-router";
 import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
+import { formatNumber } from "@/utils/common";
 
 const TransactionList = ({
   data,
@@ -138,7 +139,7 @@ const TransactionItem = ({
           <Typo
             fontWeight={"500"}
             color={item?.type == "income" ? colors.primary : colors.rose}
-          >{`${item?.type == "income" ? "+ KES" : "- KES"}${item?.amount}`}</Typo>
+          >{`${item?.type == "income" ? "+ KES" : "- KES"}${formatNumber(item?.amount)}`}</Typo>
           <Typo size={13} color={colors.neutral400}>
             {date}
           </Typo>
