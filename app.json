@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/budget.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.morynmoh.expensetrackerapp"

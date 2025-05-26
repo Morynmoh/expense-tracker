@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import * as React from "react";
 import { scale, verticalScale } from "@/utils/styling";
 import Typo from "./Typo";
@@ -12,6 +12,7 @@ import { formatNumber } from "@/utils/common";
 
 const HomeCard = () => {
   const { user } = useAuth();
+  const [showBalance, setShowBalance] = React.useState(true);
   const {
     data: wallets,
     loading: walletLoading,
@@ -45,15 +46,25 @@ const HomeCard = () => {
             <Typo color={colors.neutral800} size={17} fontWeight={"500"}>
               Total Balance
             </Typo>
-            <Icons.DotsThreeOutline
-              size={verticalScale(23)}
-              color={colors.black}
-              weight="fill"
-            />
+            <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
+              {showBalance ? (
+                <Icons.Eye
+                  size={verticalScale(23)}
+                  color={colors.black}
+                  weight="fill"
+                />
+              ) : (
+                <Icons.EyeSlash
+                  size={verticalScale(23)}
+                  color={colors.black}
+                  weight="fill"
+                />
+              )}
+            </TouchableOpacity>
           </View>
           <Typo color={colors.black} size={30} fontWeight={"bold"}>
             KES{" "}
-            {walletLoading ? "----" : formatNumber(getTotals()?.balance)}
+            {walletLoading ? "----" : showBalance ? formatNumber(getTotals()?.balance) : "****"}
           </Typo>
         </View>
 
@@ -76,7 +87,7 @@ const HomeCard = () => {
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.green} fontWeight={"600"}>
                 KES{" "}
-                {walletLoading ? "----" : formatNumber(getTotals()?.income)}
+                {walletLoading ? "----" : showBalance ? formatNumber(getTotals()?.income) : "****"}
               </Typo>
             </View>
           </View>
@@ -98,7 +109,7 @@ const HomeCard = () => {
             <View style={{ alignSelf: "center" }}>
               <Typo size={17} color={colors.rose} fontWeight={"600"}>
                 KES{" "}
-                {walletLoading ? "----" : formatNumber(getTotals()?.expenses)}
+                {walletLoading ? "----" : showBalance ? formatNumber(getTotals()?.expenses) : "****"}
               </Typo>
             </View>
           </View>
