@@ -52,9 +52,9 @@ export const expenseCategories: ExpenseCategoriesType = {
     icon: Icons.ShoppingCart,
     bgColor: "#7c3aed", // Dark Indigo
   },
-  schoolFees: {
-    label: "School Fees",
-    value: "schoolfees",
+  school: {
+    label: "School",
+    value: "school",
     icon: Icons.Student,
     bgColor: "#0f766e", // Darker Red-Brown
   },
