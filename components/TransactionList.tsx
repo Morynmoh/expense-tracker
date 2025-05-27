@@ -98,8 +98,10 @@ const TransactionItem = ({
   handleClick,
 }: TransactionItemProps) => {
   let category =
-    item?.type == "income" ? incomeCategory : expenseCategories[item.category!];
-  const IconComponent = category.icon;
+    item?.type == "income" 
+      ? incomeCategory 
+      : (item.category ? expenseCategories[item.category] : expenseCategories.others);
+  const IconComponent = category?.icon;
 
   let date = (item?.date as Timestamp)?.toDate()?.toLocaleDateString("en-GB", {
     day: "numeric",
@@ -115,7 +117,7 @@ const TransactionItem = ({
         .damping(14)}
     >
       <TouchableOpacity style={styles.row} onPress={() => handleClick(item)}>
-        <View style={[styles.icon, { backgroundColor: category.bgColor }]}>
+        <View style={[styles.icon, { backgroundColor: category?.bgColor || colors.neutral500 }]}>
           {IconComponent && (
             <IconComponent
               size={verticalScale(25)}
@@ -126,7 +128,7 @@ const TransactionItem = ({
         </View>
 
         <View style={styles.categoryDes}>
-          <Typo size={17}>{category.label}</Typo>
+          <Typo size={17}>{category?.label || "Uncategorized"}</Typo>
           <Typo
             size={12}
             color={colors.neutral400}
