@@ -72,15 +72,18 @@ const graphs = () => {
         transactionsRef,
         where("uid", "==", user?.uid),
         where("type", "==", "expense"),
+        where("category", "!=", "transfers"),
         where("date", ">=", Timestamp.fromDate(startDate)),
         where("date", "<=", Timestamp.fromDate(endDate))
       );
 
       const querySnapshot = await getDocs(q);
-      const transactions = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as TransactionType[];
+      const transactions = querySnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        } as TransactionType))
+        .filter(transaction => transaction.category !== "transfers");
 
       // Calculate expenses by category
       const categoryTotals: { [key: string]: number } = {};
@@ -96,19 +99,23 @@ const graphs = () => {
       // Convert to pie chart data format
       const pieData = Object.entries(categoryTotals)
         .sort((a, b) => b[1] - a[1]) // Sort by amount in descending order
-        .map(([category, amount]) => ({
-          value: amount,
-          text: `${((amount / total) * 100).toFixed(1)}%`,
-          color: expenseCategories[category]?.bgColor || colors.neutral500,
-          label: expenseCategories[category]?.label || "Others",
-          amount: amount,
-          focused: true,
-          textColor: colors.white,
-          textSize: 14,
-          fontWeight: '600',
-          shiftTextX: 0,
-          shiftTextY: -scale(25)
-        }));
+        .map(([category, amount]) => {
+          const percentage = (amount / total) * 100;
+          return {
+            value: amount,
+            text: percentage >= 5 ? `${percentage.toFixed(1)}%` : '', // Only show percentage for segments >= 5%
+            color: expenseCategories[category]?.bgColor || colors.neutral500,
+            label: expenseCategories[category]?.label || "Others",
+            amount: amount,
+            percentage: percentage,
+            focused: true,
+            textColor: colors.white,
+            textSize: 14,
+            fontWeight: '600',
+            shiftTextX: 0,
+            shiftTextY: -scale(25)
+          };
+        });
 
       setCategoryData(pieData);
       setTotalExpenses(total);
@@ -137,6 +144,29 @@ const graphs = () => {
   useEffect(() => {
     fetchCategoryExpenses();
   }, [selectedMonth]);
+
+  const renderCenterLabel = () => (
+    <TouchableOpacity 
+      style={styles.centerLabel}
+      onPress={() => setShowBalance(!showBalance)}
+    >
+      <Typo size={16} color={colors.neutral400}>
+        Total
+      </Typo>
+      <View style={styles.balanceContainer}>
+        <Typo size={24} fontWeight="500">
+          KES {formatNumber(totalExpenses)}
+        </Typo>
+        {!showBalance && (
+          <BlurView
+            intensity={50}
+            tint="dark"
+            style={styles.blurView}
+          />
+        )}
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <ScreenWrapper>
@@ -193,41 +223,28 @@ const graphs = () => {
           <>
             <View style={styles.chartContainer}>
               {categoryData.length > 0 ? (
-                <PieChart
-                  data={categoryData}
-                  donut
-                  showText
-                  textColor="white"
-                  radius={scale(120)}
-                  innerRadius={scale(80)}
-                  textSize={14}
-                  fontWeight="600"
-                  showValuesAsLabels={false}
-                  showTextBackground={false}
-                  textBackgroundRadius={26}
-                  centerLabelComponent={() => (
-                    <TouchableOpacity 
-                      style={styles.centerLabel}
-                      onPress={() => setShowBalance(!showBalance)}
-                    >
-                      <Typo size={16} color={colors.neutral400}>
-                        Total
-                      </Typo>
-                      <View style={styles.balanceContainer}>
-                        <Typo size={24} fontWeight="500">
-                          KES {formatNumber(totalExpenses)}
-                        </Typo>
-                        {!showBalance && (
-                          <BlurView
-                            intensity={50}
-                            tint="dark"
-                            style={styles.blurView}
-                          />
-                        )}
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                />
+                <View style={styles.chartBackground}>
+                  <PieChart
+                    data={categoryData}
+                    donut
+                    showText
+                    textColor="white"
+                    radius={scale(120)}
+                    innerRadius={scale(80)}
+                    textSize={14}
+                    fontWeight="600"
+                    showValuesAsLabels={false}
+                    showTextBackground={false}
+                    textBackgroundRadius={26}
+                    centerLabelComponent={renderCenterLabel}
+                    focusOnPress
+                    sectionAutoFocus
+                    initialAngle={90}
+                    innerCircleColor={colors.neutral800}
+                    innerCircleBorderWidth={2}
+                    innerCircleBorderColor={colors.neutral700}
+                  />
+                </View>
               ) : (
                 <View style={styles.noData}>
                   <Typo size={16} color={colors.neutral400}>
@@ -243,9 +260,14 @@ const graphs = () => {
                   <View style={[styles.legendColor, { backgroundColor: item.color }]} />
                   <View style={styles.legendText}>
                     <Typo size={14}>{item.label}</Typo>
-                    <Typo size={14} color={colors.neutral400}>
-                      KES {formatNumber(item.amount)}
-                    </Typo>
+                    <View style={styles.legendAmount}>
+                      <Typo size={14} color={colors.neutral400}>
+                        KES {formatNumber(item.amount)}
+                      </Typo>
+                      <Typo size={12} color={colors.neutral500}>
+                        ({item.percentage.toFixed(1)}%)
+                      </Typo>
+                    </View>
                   </View>
                 </View>
               ))}
@@ -287,6 +309,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: spacingY._20,
   },
+  chartBackground: {
+    backgroundColor: colors.neutral800,
+    borderRadius: radius._20,
+    padding: spacingX._20,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
   centerLabel: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -315,6 +350,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  legendAmount: {
+    alignItems: 'flex-end',
   },
   errorContainer: {
     height: scale(240),

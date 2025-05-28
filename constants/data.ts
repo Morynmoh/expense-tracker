@@ -64,11 +64,17 @@ export const expenseCategories: ExpenseCategoriesType = {
     icon: Icons.CookingPot,
     bgColor: "#404040", // Dark Gray
   },
-  insurance: {
-    label: "Insurance",
-    value: "insurance",
-    icon: Icons.ShieldCheck,
+  transfers: {
+    label: "Transfers",
+    value: "transfers",
+    icon: Icons.ArrowsCounterClockwise,
     bgColor: "#404040", // Dark Gray
+  },
+  support: {
+    label: "Support",
+    value: "support",
+    icon: Icons.FirstAid,
+    bgColor: "#065F46", // Deep Teal Green
   },
   savings: {
     label: "Savings",
@@ -88,7 +94,7 @@ export const expenseCategories: ExpenseCategoriesType = {
     icon: Icons.User,
     bgColor: "#a21caf", // Deep Pink
   },
-  homeCash: {
+  homecash: {
     label: "Homecash",
     value: "homecash",
     icon: Icons.Money,
