@@ -26,6 +26,7 @@ import { formatNumber } from "@/utils/common";
 const Wallet = () => {
   const router = useRouter();
   const { user } = useAuth();
+  const [showBalance, setShowBalance] = useState(false);
   const {
     data: wallets,
     loading,
@@ -46,12 +47,29 @@ const Wallet = () => {
       <View style={styles.container}>
         {/* balance view */}
         <View style={styles.balanceView}>
-          <View style={{ alignItems: "center" }}>
+          <View style={styles.balanceContainer}>
+            <View style={styles.balanceHeader}>
+              <Typo size={16} color={colors.neutral300}>
+                Total balance
+              </Typo>
+              <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
+                {showBalance ? (
+                  <Icons.Eye
+                    size={verticalScale(23)}
+                    color={colors.white}
+                    weight="fill"
+                  />
+                ) : (
+                  <Icons.EyeSlash
+                    size={verticalScale(23)}
+                    color={colors.white}
+                    weight="fill"
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
             <Typo size={45} fontWeight={"500"}>
-              KES {formatNumber(getTotalBalance())}
-            </Typo>
-            <Typo size={16} color={colors.neutral300}>
-              Total balance
+              KES {showBalance ? formatNumber(getTotalBalance()) : "****"}
             </Typo>
           </View>
         </View>
@@ -79,10 +97,14 @@ const Wallet = () => {
           <FlatList
             data={wallets}
             renderItem={({ item, index }) => (
-              <WalletListItem item={item} router={router} index={index} />
+              <WalletListItem 
+                item={item} 
+                router={router} 
+                index={index}
+                showBalance={showBalance}
+              />
             )}
             contentContainerStyle={styles.listStyle}
-            // keyExtractor={(item) => item.id}
           />
         </View>
       </View>
@@ -103,6 +125,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  balanceContainer: {
+    alignItems: "center",
+    gap: spacingY._10,
+  },
+  balanceHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacingX._10,
+  },
   flexRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -113,7 +144,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.neutral900,
     borderTopRightRadius: radius._30,
-
     borderTopLeftRadius: radius._30,
     padding: spacingX._20,
     paddingTop: spacingX._25,

@@ -12,7 +12,7 @@ import { formatNumber } from "@/utils/common";
 
 const HomeCard = () => {
   const { user } = useAuth();
-  const [showBalance, setShowBalance] = React.useState(true);
+  const [showBalance, setShowBalance] = React.useState(false);
   const {
     data: wallets,
     loading: walletLoading,

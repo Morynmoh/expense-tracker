@@ -14,10 +14,12 @@ const WalletListItem = ({
   item,
   index,
   router,
+  showBalance,
 }: {
   item: WalletType;
   index: number;
   router: Router;
+  showBalance: boolean;
 }) => {
   const handleOpen = () => {
     router.push({
@@ -48,7 +50,7 @@ const WalletListItem = ({
         <View style={styles.nameContainer}>
           <Typo size={16}>{item.name}</Typo>
           <Typo size={14} color={colors.neutral400}>
-            KES {formatNumber(item?.amount || 0)}
+            KES {showBalance ? formatNumber(item?.amount || 0) : "****"}
           </Typo>
         </View>
 
